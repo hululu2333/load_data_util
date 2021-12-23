@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="290497cd-feb5-49a8-afef-d3eaa9f7066d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/BaiduNetdiskDownload/apache-maven-3.6.0" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="createModuleGroups" value="true" />
+        <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="22ZhPJG9efLjCZdjpaBKb9FTrec" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="Scala Compiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\IDEAProject\load_data_utils\src\main\resources" />
+      <recent name="F:\IDEAProject\load_data_utils\src\main\scala\com\ads\handler" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn compile" />
+      <command value="mvn clean scala:compile" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Bootstrap">
+    <configuration name="Bootstrap (1)" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.a.Bootstrap" />
+      <module name="load_data_utils" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.a.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Bootstrap" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.ads.Bootstrap" />
+      <module name="load_data_utils" />
+      <option name="PROGRAM_PARAMETERS" value="hive -s sharehis -n ods -t targettable -m incr -i dt -v 20211101 -r name,dt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ads.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Bootstrap" />
+      <item itemvalue="Application.Bootstrap (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Bootstrap (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="290497cd-feb5-49a8-afef-d3eaa9f7066d" name="Default Changelist" comment="" />
+      <created>1640050990659</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640050990659</updated>
+      <workItem from="1640050994344" duration="20914000" />
+      <workItem from="1640139978561" duration="16143000" />
+      <workItem from="1640164060195" duration="1352000" />
+      <workItem from="1640165480299" duration="1281000" />
+      <workItem from="1640166816196" duration="9590000" />
+      <workItem from="1640223880859" duration="19297000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="833" y="176" key="#Bootstrap" timestamp="1640140051229">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="833" y="176" key="#Bootstrap/0.0.1536.824@0.0.1536.824" timestamp="1640140051229" />
+    <state x="572" y="225" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1640159606525">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="572" y="225" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1640159606525" />
+    <state x="95" y="141" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1640237442047">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="95" y="141" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1640237442047" />
+    <state x="469" y="156" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1640053331305">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="469" y="156" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1640053331305" />
+    <state x="574" y="218" key="FileChooserDialogImpl" timestamp="1640053328651">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1640053328651" />
+    <state width="1493" height="87" key="GridCell.Tab.0.bottom" timestamp="1640257224789">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="87" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1640257224789" />
+    <state width="1493" height="87" key="GridCell.Tab.0.center" timestamp="1640257224789">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="87" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1640257224789" />
+    <state width="1493" height="87" key="GridCell.Tab.0.left" timestamp="1640257224788">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="87" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1640257224788" />
+    <state width="1493" height="87" key="GridCell.Tab.0.right" timestamp="1640257224789">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="87" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1640257224789" />
+    <state x="350" y="115" key="SettingsEditor" timestamp="1640181511066">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="350" y="115" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1640181511066" />
+    <state x="458" y="452" width="672" height="677" key="run.anything.popup" timestamp="1640168259214">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="458" y="452" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1640168259214" />
+  </component>
+</project>
