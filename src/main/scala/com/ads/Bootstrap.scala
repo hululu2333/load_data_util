@@ -16,7 +16,7 @@ object Bootstrap {
 
     val param = new mutable.ArrayBuffer[String]
     for(i <- 1 until args.length){
-      println(args(i))
+      print(args(i) + " ")
       param += args(i)
     }
 

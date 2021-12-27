@@ -107,6 +107,7 @@ class ToHbase {
     hbaseConf.set(HConstants.ZOOKEEPER_CLIENT_PORT, ProperUtils.getProperty("hbase.zookeeper.port"))
     println("zookeeper value from config：" + ProperUtils.getProperty("hbase.zookeeper")) // 临时打印
     hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, param.targetTable)
+    hbaseConf.set("hbase.mapreduce.hfileoutputformat.table.name", param.targetTable) // 这个和上一个应该只能留一个
     connection = ConnectionFactory.createConnection(hbaseConf) // 这两行用于建立hbase表
     admin = connection.getAdmin
   }
@@ -190,7 +191,7 @@ class ToHbase {
     // 开始导入
     val bulkLoader: LoadIncrementalHFiles = new LoadIncrementalHFiles(hbaseConf)
     val regionLocator = connection.getRegionLocator(TableName.valueOf(param.targetTable))
-    bulkLoader.doBulkLoad(new Path(hdfsPath), admin, connection.getTable(TableName.valueOf(param.targetTable)), regionLocator)
+    bulkLoader.doBulkLoad(new Path(hdfsPath + param.targetTable), admin, connection.getTable(TableName.valueOf(param.targetTable)), regionLocator)
   }
 
 
