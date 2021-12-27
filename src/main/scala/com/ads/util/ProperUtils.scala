@@ -5,7 +5,7 @@ import java.util.Properties
 
 object ProperUtils {
   val pro = new Properties()
-  pro.load(new FileInputStream("target/classes/config.properties"))
+  pro.load(this.getClass.getClassLoader.getResourceAsStream("config.properties"))
 
   def getProperty(key: String): String = {
     pro.getProperty(key)

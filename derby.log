@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Dec 23 19:00:46 GMT+08:00 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-017d-e6f3-5660-000008a6c4d0 
-on database directory F:\IDEAProject\load_data_utils\metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@24fef542 
+Fri Dec 24 09:36:42 GMT+08:00 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-017d-ea15-45ca-00001a675048 
+on database directory F:\IDEAProject\load_data_utils\metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@4f581211 
 Loaded from file:/D:/Repository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_181-b13
