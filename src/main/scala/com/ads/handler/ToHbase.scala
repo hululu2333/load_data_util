@@ -104,6 +104,7 @@ class ToHbase {
     fileSystem = FileSystem.get(hadoopConf) // 用于删除hdfs文件夹
     hbaseConf = HBaseConfiguration.create(hadoopConf)
     hbaseConf.set(HConstants.ZOOKEEPER_QUORUM, ProperUtils.getProperty("hbase.zookeeper"))
+    hbaseConf.set(HConstants.ZOOKEEPER_CLIENT_PORT, ProperUtils.getProperty("hbase.zookeeper.port"))
     println("zookeeper value from config：" + ProperUtils.getProperty("hbase.zookeeper")) // 临时打印
     hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, param.targetTable)
     connection = ConnectionFactory.createConnection(hbaseConf) // 这两行用于建立hbase表
