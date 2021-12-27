@@ -36,7 +36,7 @@ class ToHbase {
 
 
   def prepare(args: Seq[String]): Unit = {
-//     创建spark session
+    //     创建spark session
     val sparkConf = new SparkConf()
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
       .registerKryoClasses(Array(classOf[ImmutableBytesWritable], classOf[Result]))
@@ -114,13 +114,13 @@ class ToHbase {
 
 
   def genHfile(): Unit = {
-//    // 创建测试用的表
-//    val spark2 = spark
-//    import spark2.implicits._
-//    val df1: DataFrame = Seq((1, null, 20211101)
-//      , (2, "jia", 20211102)
-//      , (3, "xiang", 20211101)).toDF("id", "name", "dt")
-//    df1.createOrReplaceTempView("sharehis")
+    //    // 创建测试用的表
+    //    val spark2 = spark
+    //    import spark2.implicits._
+    //    val df1: DataFrame = Seq((1, null, 20211101)
+    //      , (2, "jia", 20211102)
+    //      , (3, "xiang", 20211101)).toDF("id", "name", "dt")
+    //    df1.createOrReplaceTempView("sharehis")
 
     // 删除目标hdfs路径
     val bulkLoadPath = hdfsPath + param.targetTable
@@ -144,9 +144,13 @@ class ToHbase {
     val timestamp = System.currentTimeMillis() // 时间戳
 
     // 生成HFile并写到hdfs中
-    df.rdd.flatMap(row => {
-      val rk = row.getAs("" +
-        "").toString // 设置rowkey
+    df.sort(df.col("rowkey")).rdd.flatMap(row => {
+      if (row.getAs("rowkey") == null) {
+        val rk: String = "\0"
+      }
+      val rk = row.getAs("rowkey").toString // 设置rowkey
+
+
       val rkb = Bytes.toBytes(rk)
       val rkw = new ImmutableBytesWritable(rkb)
       val arr = ArrayBuffer[(ImmutableBytesWritable, KeyValue)]()
