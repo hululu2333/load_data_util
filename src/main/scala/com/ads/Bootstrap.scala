@@ -6,9 +6,6 @@ import scala.collection.mutable
 /**
  * 目前的数据源只有hive，目标dbms可选
  * 新增目标dbms可以在handler中加对应的实现类
- * 入参：目标dbms等
- *
- * rowkey怎么设计？
  */
 object Bootstrap {
   def main(args: Array[String]): Unit = {

@@ -105,7 +105,7 @@ class ToHbase {
     hbaseConf = HBaseConfiguration.create(hadoopConf)
     hbaseConf.set(HConstants.ZOOKEEPER_QUORUM, ProperUtils.getProperty("hbase.zookeeper"))
     hbaseConf.set(HConstants.ZOOKEEPER_CLIENT_PORT, ProperUtils.getProperty("hbase.zookeeper.port"))
-    println("zookeeper value from config：" + ProperUtils.getProperty("hbase.zookeeper")) // 临时打印
+    println("\n zookeeper value from config：" + ProperUtils.getProperty("hbase.zookeeper")) // 临时打印
     hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, param.targetTable)
     hbaseConf.set("hbase.mapreduce.hfileoutputformat.table.name", param.targetTable) // 这个和上一个应该只能留一个
     connection = ConnectionFactory.createConnection(hbaseConf) // 这两行用于建立hbase表
