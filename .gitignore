@@ -1,0 +1,10 @@
+##----------idea----------
+*.iml
+.idea/
+metastore_db/
+target/
+derby.log
+firestorm.log
+
+
+
