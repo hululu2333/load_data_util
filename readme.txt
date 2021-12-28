@@ -4,3 +4,6 @@ branch1.0: 稳定版本，在测试环境可以正常运行。但存在一些不
 branch1.1: 将多余的注释去掉。新建一个项目入口Bootstrap2用于测试在指定namespace下创建表。多配的环境变量没有去掉，
 hfile文件个数通过执行spark-submit时手动指定（当concat字段存在null值时，rowkey就会被置为null。第一会导致空指针，
 第二会导致插入的那批hfile中有相同rowkey的记录）
+
+branch1.2：修改上一个版本concat字段存在null值的bug。所有字段用nvl包括起来，如为空值就用"null"代替。目前判断作为
+rowkey的字段只有String类型
