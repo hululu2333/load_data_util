@@ -26,6 +26,7 @@ class ToHbase {
   var connection: Connection = _
   var admin: Admin = _
   var fileSystem: FileSystem = _
+  var fields: String = _
 
 
   def run(args: Seq[String]): Unit = {
@@ -36,7 +37,7 @@ class ToHbase {
 
 
   def prepare(args: Seq[String]): Unit = {
-    //     创建spark session
+    // 创建spark session
     val sparkConf = new SparkConf()
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
       .registerKryoClasses(Array(classOf[ImmutableBytesWritable], classOf[Result]))
@@ -98,6 +99,8 @@ class ToHbase {
       case None => throw new Exception("wrong arguments")
     }
 
+    fields = param.rowKey.split(",").mkString("nvl(", ", \"null\"), nvl(", ", \"null\")")
+
     // 配置hbase与hadoop配置
     val hadoopConf = new Configuration()
     hadoopConf.set("fs.defaultFS", ProperUtils.getProperty("hbase.defaultFS"))
@@ -130,7 +133,7 @@ class ToHbase {
 
     val df = sql(
       s"""
-         |select concat(${param.rowKey}) rowkey, *
+         |select concat(${fields}) rowkey, *
          |from ${param.sourceTable}
          |where ${queryLim}
          |"""
@@ -145,11 +148,7 @@ class ToHbase {
 
     // 生成HFile并写到hdfs中
     df.sort(df.col("rowkey")).rdd.flatMap(row => {
-      if (row.getAs("rowkey") == null) {
-        val rk: String = "\0"
-      }
       val rk = row.getAs("rowkey").toString // 设置rowkey
-
 
       val rkb = Bytes.toBytes(rk)
       val rkw = new ImmutableBytesWritable(rkb)
