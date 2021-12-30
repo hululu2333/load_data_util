@@ -9,8 +9,8 @@ import org.apache.hadoop.hbase.io.ImmutableBytesWritable
 import org.apache.hadoop.hbase.io.compress.Compression
 import org.apache.hadoop.hbase.mapreduce.{HFileOutputFormat2, TableOutputFormat}
 import org.apache.hadoop.hbase.tool.LoadIncrementalHFiles
-import org.apache.hadoop.hbase.{HBaseConfiguration, HColumnDescriptor, HConstants, HTableDescriptor, KeyValue, TableName}
 import org.apache.hadoop.hbase.util.Bytes
+import org.apache.hadoop.hbase._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
@@ -109,22 +109,14 @@ class ToHbase {
     hbaseConf.set(HConstants.ZOOKEEPER_QUORUM, ProperUtils.getProperty("hbase.zookeeper"))
     hbaseConf.set(HConstants.ZOOKEEPER_CLIENT_PORT, ProperUtils.getProperty("hbase.zookeeper.port"))
     println("\n zookeeper value from config：" + ProperUtils.getProperty("hbase.zookeeper")) // 临时打印
-    hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, param.targetTable)
+    //hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, param.targetTable)
     hbaseConf.set("hbase.mapreduce.hfileoutputformat.table.name", param.targetTable) // 这个和上一个应该只能留一个
-    connection = ConnectionFactory.createConnection(hbaseConf) // 这两行用于建立hbase表
+    connection = ConnectionFactory.createConnection(hbaseConf) // 对与hbase连接的抽象
     admin = connection.getAdmin
   }
 
 
   def genHfile(): Unit = {
-    //    // 创建测试用的表
-    //    val spark2 = spark
-    //    import spark2.implicits._
-    //    val df1: DataFrame = Seq((1, null, 20211101)
-    //      , (2, "jia", 20211102)
-    //      , (3, "xiang", 20211101)).toDF("id", "name", "dt")
-    //    df1.createOrReplaceTempView("sharehis")
-
     // 删除目标hdfs路径
     val bulkLoadPath = hdfsPath + param.targetTable
     if (fileSystem.exists(new Path(bulkLoadPath))) {
@@ -147,7 +139,8 @@ class ToHbase {
     val timestamp = System.currentTimeMillis() // 时间戳
 
     // 生成HFile并写到hdfs中
-    df.sort(df.col("rowkey")).rdd.flatMap(row => {
+    df.sort(df.col("rowkey"))
+      .rdd.flatMap(row => {
       val rk = row.getAs("rowkey").toString // 设置rowkey
 
       val rkb = Bytes.toBytes(rk)
@@ -181,8 +174,39 @@ class ToHbase {
 
 
   def bulkLoad(): Unit = {
-    // 创建hbase表
-    val hBaseTableName = TableName.valueOf(param.targetTable)
+    val fullName = s"${param.nameSpace}:${param.targetTable}"
+
+    createHbaseNameSpaceIfNotExists(param.nameSpace)
+    createHbaseTableIfNotExists(fullName)
+
+    // 开始导入
+    val bulkLoader: LoadIncrementalHFiles = new LoadIncrementalHFiles(hbaseConf)
+    val regionLocator = connection.getRegionLocator(TableName.valueOf(fullName))
+    bulkLoader.doBulkLoad(new Path(hdfsPath + param.targetTable), admin, connection.getTable(TableName.valueOf(fullName)), regionLocator)
+  }
+
+
+  def sql(query: String): DataFrame = {
+    println(query)
+    spark.sql(query)
+  }
+
+
+  def createHbaseNameSpaceIfNotExists(spaceName: String): Unit = {
+    var exists: Boolean = false
+
+    val descriptors: Array[NamespaceDescriptor] = admin.listNamespaceDescriptors()
+    descriptors.foreach(descriptor => if(descriptor.getName.equals(spaceName)) exists = true )
+
+    if(!exists){
+      val builder: NamespaceDescriptor.Builder = NamespaceDescriptor.create(spaceName)
+      admin.createNamespace(builder.build())
+    }
+  }
+
+
+  def createHbaseTableIfNotExists(fullName: String): Unit = {
+    val hBaseTableName = TableName.valueOf(fullName)
     if (!admin.tableExists(hBaseTableName)) {
       val tableDesc = new HTableDescriptor(hBaseTableName)
       val hcd = new HColumnDescriptor(colFamily)
@@ -190,16 +214,5 @@ class ToHbase {
       tableDesc.addFamily(hcd)
       admin.createTable(tableDesc)
     }
-
-    // 开始导入
-    val bulkLoader: LoadIncrementalHFiles = new LoadIncrementalHFiles(hbaseConf)
-    val regionLocator = connection.getRegionLocator(TableName.valueOf(param.targetTable))
-    bulkLoader.doBulkLoad(new Path(hdfsPath + param.targetTable), admin, connection.getTable(TableName.valueOf(param.targetTable)), regionLocator)
-  }
-
-
-  def sql(query: String): DataFrame = {
-    println(query)
-    spark.sql(query)
   }
 }

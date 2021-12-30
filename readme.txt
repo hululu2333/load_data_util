@@ -6,8 +6,7 @@ branch1.1:
 存在的bug：多配的环境变量没有去掉，当concat字段存在null值时，rowkey就会被置为null。第一会导致空指针，
 第二会导致插入的那批hfile中有相同rowkey的记录
 
-
-branch1.2：
+branch1.2:
 做出的更新：修改上一个版本concat字段存在null值的bug。所有字段用nvl包括起来，如为空值就用"null"代替。前提是只指定
 String类型的字段为rowkey。如果传入了非空的Int类型不会报错，理论上说源表中为Int类型的字段应该不会为null
 存在的bug：份额历史表理论上根据七个字段可以确定唯一的值，但实际操作不是如此。pd_code为519999的产品，可能会把不同
@@ -16,3 +15,7 @@ String类型的字段为rowkey。如果传入了非空的Int类型不会报错�
 branch1.3:
 做出的更新：组成rowkey的各个字段之间用-连接。
 存在的bug：代码中需要判断namespace是否存在，不在就要自己创建。   适配历史份额表存在重复数据的bug
+
+branch1.4:
+做出的更新：删除多余配置。自动创建namespace。只保留一份程序入口。第一个参数改为hbase.
+存在的bug：适配历史份额表存在重复数据的bug。map阶段存在数据侵倾斜。map阶段可能会执行多次。

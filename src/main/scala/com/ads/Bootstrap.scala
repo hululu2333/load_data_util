@@ -1,4 +1,5 @@
 package com.ads
+
 import com.ads.handler.ToHbase
 
 import scala.collection.mutable
@@ -18,8 +19,8 @@ object Bootstrap {
     }
 
     dbms match {
-      case "hive" => new ToHbase().run(param)
-      case _ => throw new Exception("wrong target dbms, eg: hive")
+      case "hbase" => new ToHbase().run(param)
+      case _ => throw new Exception("wrong target dbms, eg: hbase")
     }
   }
 }
