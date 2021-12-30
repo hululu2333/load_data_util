@@ -133,7 +133,7 @@ class ToHbase {
 
     val df = sql(
       s"""
-         |select concat(${fields}) rowkey, *
+         |select concat_ws("-",${fields}) rowkey, *
          |from ${param.sourceTable}
          |where ${queryLim}
          |"""
