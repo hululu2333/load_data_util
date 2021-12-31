@@ -12,6 +12,7 @@ import org.apache.hadoop.hbase.tool.LoadIncrementalHFiles
 import org.apache.hadoop.hbase.util.Bytes
 import org.apache.hadoop.hbase._
 import org.apache.spark.SparkConf
+import org.apache.spark.sql.types.DecimalType
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 import scala.collection.mutable.ArrayBuffer
@@ -134,6 +135,11 @@ class ToHbase {
     println("source data")
     df.show()
 
+    val dtypes: Array[(String, String)] = df.dtypes
+    dtypes.foreach{ case (fieldName, typ) =>
+      print(s"$fieldName    $typ\n")
+    }
+
     val colNames: Array[String] = df.columns.sortBy(x => x) // 拿到各个字段的字段名，并排序
     val cf = Bytes.toBytes(colFamily) //列族
     val timestamp = System.currentTimeMillis() // 时间戳
@@ -150,6 +156,9 @@ class ToHbase {
       colNames.foreach { colName =>
         var colValue: String = ""
         if (row.getAs(colName) != null) {
+          if(row.getAs(colName).isInstanceOf[DecimalType]) {print("是DecimalType类型"); print(row.getAs[DecimalType](colName))}
+          if(row.getAs(colName).isInstanceOf[BigDecimal]) {print("是BigDecimal类型"); print(row.getAs[BigDecimal](colName).toPlainString)}
+
           colValue = row.getAs(colName).toString
         }
 
